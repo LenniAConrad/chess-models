@@ -1,0 +1,95 @@
+/* chess-models-github-banner.dot
+ * Render:
+ *   neato -Tsvg assets/chess-models-github-banner.dot -o assets/chess-models-github-banner.svg
+ *   neato -Tpng assets/chess-models-github-banner.dot -o assets/chess-models-github-banner.png
+ *   convert assets/chess-models-github-banner.png -background "#fbfbfb" -gravity center -extent 1280x640 assets/chess-models-github-banner.png
+ */
+graph ChessModels_Banner {
+  layout=neato;
+  overlap=false;
+  splines=curved;
+  outputorder=edgesfirst;
+
+  dpi=72;
+  size="17.78,8.89!";
+  bgcolor="#fbfbfb";
+
+  graph [fontname="Helvetica"];
+  node [fontname="Helvetica", fontsize=16, fontcolor="#222222"];
+  edge [color="#d8d8d8", penwidth=1.6];
+
+  /* ---- Right dendrite motif ---- */
+  node [shape=circle, fixedsize=true, label="", style=filled, color="#d9dde2", penwidth=1.4];
+
+  bodyA [pos="850,315!", width=1.18, fillcolor="#fbfbfb"];
+  bodyB [pos="1045,180!", width=1.10, fillcolor="#fafafa"];
+  bodyC [pos="1128,455!", width=1.28, fillcolor="#fafafa"];
+
+  a1 [pos="760,205!", width=0.38, fillcolor="#edf1f4"];
+  a2 [pos="708,118!", width=0.20, fillcolor="#eef2f5"];
+  a3 [pos="736,420!", width=0.34, fillcolor="#edf1f4"];
+  a4 [pos="676,514!", width=0.22, fillcolor="#eef2f5"];
+  a5 [pos="838,520!", width=0.56, fillcolor="#f5f7f9"];
+  a6 [pos="930,395!", width=0.28, fillcolor="#edf1f4"];
+
+  b1 [pos="930,108!", width=0.42, fillcolor="#eef1f4"];
+  b2 [pos="840,82!", width=0.20, fillcolor="#eef2f5"];
+  b3 [pos="1130,112!", width=0.36, fillcolor="#eef1f4"];
+  b4 [pos="1208,96!", width=0.20, fillcolor="#eef2f5"];
+  b5 [pos="1018,276!", width=0.46, fillcolor="#f0f3f5"];
+  b6 [pos="1146,276!", width=0.22, fillcolor="#eef2f5"];
+
+  c1 [pos="1042,356!", width=0.54, fillcolor="#f3f6f8"];
+  c2 [pos="1020,560!", width=0.50, fillcolor="#f5f7f9"];
+  c3 [pos="1168,570!", width=0.44, fillcolor="#f4f6f8"];
+  c4 [pos="1228,504!", width=0.24, fillcolor="#eef2f5"];
+  c5 [pos="1216,372!", width=0.34, fillcolor="#eef1f4"];
+  c6 [pos="930,470!", width=0.24, fillcolor="#eef2f5"];
+
+  edge [color="#d7dade", penwidth=1.9];
+  bodyA -- bodyB;
+  bodyA -- a1;
+  a1 -- a2 [penwidth=1.5];
+  bodyA -- a3;
+  a3 -- a4 [penwidth=1.5];
+  bodyA -- a5;
+  bodyA -- a6 [penwidth=1.45];
+
+  bodyB -- b1;
+  b1 -- b2 [penwidth=1.45];
+  bodyB -- b3;
+  b3 -- b4 [penwidth=1.45];
+  bodyB -- b5;
+  b5 -- b6 [penwidth=1.4];
+
+  bodyC -- c1;
+  bodyC -- c2;
+  bodyC -- c3;
+  c3 -- c4 [penwidth=1.45];
+  bodyC -- c5;
+  bodyC -- c6 [penwidth=1.45];
+
+  edge [color="#dadddf", penwidth=1.5];
+  b5 -- c1;
+  a6 -- c1;
+  a5 -- c2;
+  c1 -- c5;
+  a5 -- c6 [penwidth=1.35];
+
+  /* ---- Left text block ---- */
+  textblock [shape=plaintext, pos="360,320!", fixedsize=false, style="",
+    label=<<TABLE BORDER="0" CELLBORDER="0" CELLPADDING="0" ALIGN="LEFT">
+      <TR><TD ALIGN="LEFT"><FONT POINT-SIZE="72" COLOR="#222222"><B>ChessModels</B></FONT></TD></TR>
+      <TR><TD ALIGN="LEFT"><FONT POINT-SIZE="30" COLOR="#444444">Chess Neural Network Weights and Docs</FONT></TD></TR>
+      <TR><TD ALIGN="LEFT"><FONT POINT-SIZE="22" COLOR="#666666">Versioned Binaries - Hashes - Minimal Metadata</FONT></TD></TR>
+    </TABLE>>];
+
+  anchorL [shape=point, width=0.01, label="", pos="80,320!", style=invis];
+  anchorR [shape=point, width=0.01, label="", pos="1180,320!", style=invis];
+  cornerTL [shape=point, width=0.01, label="", pos="10,630!", style=invis];
+  cornerTR [shape=point, width=0.01, label="", pos="1270,630!", style=invis];
+  cornerBL [shape=point, width=0.01, label="", pos="10,10!", style=invis];
+  cornerBR [shape=point, width=0.01, label="", pos="1270,10!", style=invis];
+
+  anchorL -- textblock [style=invis];
+}

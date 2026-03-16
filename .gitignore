@@ -1,0 +1,26 @@
+# Repository-local noise
+.directory
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editors
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Temporary downloads and archives
+*.part
+*.tmp
+*.temp
+*.aria2
+
+# Logs
+*.log
+
+# Local environments
+.venv/
+venv/
