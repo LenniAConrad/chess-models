@@ -1,0 +1,142 @@
+/* LCZero #610153 architecture diagram.
+ * Render:
+ *   dot -Tsvg assets/lc0-610153-architecture.dot -o assets/lc0-610153-architecture.svg
+ */
+digraph lc0_610153_architecture {
+  rankdir=TB;
+  bgcolor="transparent";
+  splines=ortho;
+  pad="0.20";
+  nodesep="0.35";
+  ranksep="0.70";
+
+  graph [fontname="Helvetica", fontsize=14];
+  node  [fontname="Helvetica", fontsize=12];
+  edge  [fontname="Helvetica", fontsize=10, color="#424242", arrowsize=0.8, penwidth=1.2];
+
+  subgraph cluster_input {
+    label="Input encoding";
+    style="rounded";
+    color="#90CAF9";
+    fontcolor="#0D47A1";
+    penwidth=1.4;
+
+    node [shape=note, style="filled", fillcolor="#E3F2FD", color="#1565C0", penwidth=1.2];
+    position [label="FEN / position\nside to move oriented"];
+
+    node [shape=box, style="rounded,filled", fillcolor="#E3F2FD", color="#1565C0", penwidth=1.2];
+    planes [label="Classical LC0 planes\n112 x 8 x 8"];
+  }
+
+  subgraph cluster_stem {
+    label="Stem";
+    style="rounded";
+    color="#B2DFDB";
+    fontcolor="#004D40";
+    penwidth=1.4;
+
+    node [shape=box, style="rounded,filled", fillcolor="#E0F2F1", color="#00796B", penwidth=1.2];
+    input_conv [label="Conv 3x3\n112 -> 384"];
+    input_relu [label="ReLU\n384 x 8 x 8"];
+  }
+
+  subgraph cluster_tower {
+    label="Residual tower";
+    style="rounded";
+    color="#A5D6A7";
+    fontcolor="#1B5E20";
+    penwidth=1.4;
+
+    node [shape=box, style="rounded,filled", fillcolor="#E8F5E9", color="#2E7D32", penwidth=1.2];
+    res_conv1 [label="Conv 3x3\n384 -> 384"];
+    res_relu1 [label="ReLU"];
+    res_conv2 [label="Conv 3x3\n384 -> 384"];
+    res_add [label="SE gated residual\nadd + ReLU"];
+
+    node [shape=component, style="filled", fillcolor="#F1F8E9", color="#558B2F", penwidth=1.2];
+    se [label="Squeeze-excitation\navg pool -> 32 -> 768\nsigmoid gate + bias"];
+
+    node [shape=note, style="filled", fillcolor="#F1F8E9", color="#558B2F", penwidth=1.2];
+    repeat [label="Repeated 30 blocks\n384 trunk channels"];
+  }
+
+  subgraph cluster_policy {
+    label="Policy head";
+    style="rounded";
+    color="#FFE082";
+    fontcolor="#E65100";
+    penwidth=1.4;
+
+    node [shape=box, style="rounded,filled", fillcolor="#FFF3E0", color="#EF6C00", penwidth=1.2];
+    policy_stem [label="Conv 3x3 + ReLU\n384 -> 384"];
+    policy_out [label="Conv 3x3\n384 -> 80"];
+    policy_map [label="Policy map\n80 x 64 -> 4,672"];
+
+    node [shape=note, style="filled", fillcolor="#FFF8E1", color="#EF6C00", penwidth=1.2];
+    policy_logits [label="Move logits\nLC0 move encoding"];
+  }
+
+  subgraph cluster_value {
+    label="Value head";
+    style="rounded";
+    color="#C5CAE9";
+    fontcolor="#1A237E";
+    penwidth=1.4;
+
+    node [shape=box, style="rounded,filled", fillcolor="#E8EAF6", color="#303F9F", penwidth=1.2];
+    value_conv [label="Conv 1x1 + ReLU\n384 -> 32"];
+    value_flat [label="Flatten\n32 x 64 = 2,048"];
+    value_fc1 [label="Dense + ReLU\n2,048 -> 128"];
+    value_fc2 [label="Dense\n128 -> 3"];
+
+    node [shape=note, style="filled", fillcolor="#E8EAF6", color="#303F9F", penwidth=1.2];
+    wdl [label="Softmax WDL\nvalue = win - loss"];
+  }
+
+  subgraph cluster_artifact {
+    label="Artifact";
+    style="rounded";
+    color="#D1C4E9";
+    fontcolor="#4527A0";
+    penwidth=1.4;
+
+    node [shape=note, style="filled", fillcolor="#EDE7F6", color="#5E35B1", penwidth=1.2];
+    weights [label="models/lc0_610153.bin\nLC0J v1\n83,045,683 params"];
+  }
+
+  position -> planes;
+  planes -> input_conv;
+  input_conv -> input_relu;
+  input_relu -> res_conv1;
+  res_conv1 -> res_relu1;
+  res_relu1 -> res_conv2;
+  res_conv2 -> se;
+  se -> res_add;
+  input_relu -> res_add [style=dashed, xlabel="skip"];
+  res_add -> repeat;
+
+  repeat -> policy_stem;
+  policy_stem -> policy_out;
+  policy_out -> policy_map;
+  policy_map -> policy_logits;
+
+  repeat -> value_conv;
+  value_conv -> value_flat;
+  value_flat -> value_fc1;
+  value_fc1 -> value_fc2;
+  value_fc2 -> wdl;
+
+  weights -> input_conv [style=dashed];
+  weights -> repeat [style=dashed];
+  weights -> policy_stem [style=dashed];
+  weights -> value_conv [style=dashed];
+
+  { rank=same; position; planes; }
+  { rank=same; input_conv; input_relu; }
+  { rank=same; res_conv1; res_relu1; res_conv2; }
+  { rank=same; se; res_add; repeat; }
+  { rank=same; policy_stem; value_conv; }
+  { rank=same; policy_out; value_flat; }
+  { rank=same; policy_map; value_fc1; }
+  { rank=same; policy_logits; wdl; }
+}
