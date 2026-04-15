@@ -282,7 +282,7 @@
 <polygon fill="#ede7f6" stroke="#5e35b1" stroke-width="1.2" points="634,-746 499,-746 499,-699 640,-699 640,-740 634,-746"/>
 <polyline fill="none" stroke="#5e35b1" stroke-width="1.2" points="634,-746 634,-740 "/>
 <polyline fill="none" stroke="#5e35b1" stroke-width="1.2" points="640,-740 634,-740 "/>
-<text text-anchor="middle" x="569.5" y="-732.4" font-family="Helvetica,sans-Serif" font-size="12.00">models/lc0_610153.bin</text>
+<text text-anchor="middle" x="569.5" y="-732.4" font-family="Helvetica,sans-Serif" font-size="12.00">models/leela_112planes-30blocksx384-policyhead80-valuehead32-policy4672-wdl3.bin</text>
 <text text-anchor="middle" x="569.5" y="-719.4" font-family="Helvetica,sans-Serif" font-size="12.00">LC0J v1</text>
 <text text-anchor="middle" x="569.5" y="-706.4" font-family="Helvetica,sans-Serif" font-size="12.00">83,045,683 params</text>
 </g>

@@ -24,3 +24,10 @@ Thumbs.db
 # Local environments
 .venv/
 venv/
+__pycache__/
+
+# Local classifier training data and outputs
+training/**/data/
+training/**/runs/
+training/**/*.npy
+training/**/*.pt

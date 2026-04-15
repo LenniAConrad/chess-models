@@ -101,7 +101,7 @@ digraph lc0_744706_architecture {
     penwidth=1.4;
 
     node [shape=note, style="filled", fillcolor="#EDE7F6", color="#5E35B1", penwidth=1.2];
-    weights [label="models/lc0_744706.bin\nLC0J v1\n3,713,203 params"];
+    weights [label="models/leela_112planes-10blocksx128-policyhead80-valuehead32-policy4672-wdl3.bin\nLC0J v1\n3,713,203 params"];
   }
 
   position -> planes;
