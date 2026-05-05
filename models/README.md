@@ -21,6 +21,18 @@
 - Approx. size: 10 blocks, 128 filters (~3.7M parameters)
 - Architecture diagram: [`../assets/lc0-744706-architecture.dot`](../assets/lc0-744706-architecture.dot)
 
+## `BT4-1024x15x32h-swa-6147500-policytune-332.pb.gz` (LC0 protobuf gzip)
+
+- Size: 365 MiB
+- Bytes: `382645315`
+- SHA-256: `e6ada9d6c4a769bfab3aa0848d82caeb809aa45f83e6c605fc58a31d21bdd618`
+- Origin: official LCZero best-net list, `BT4-it332`
+- Architecture: LCZero BT4 attention-body transformer, 1024 embedding size, 15 encoder blocks, 32 attention heads, 1536 encoder DFF
+- Format: `NETWORK_ATTENTIONBODY_WITH_MULTIHEADFORMAT`, `INPUT_CLASSICAL_112_PLANE`, `POLICY_ATTENTION`, `VALUE_WDL`, `MOVES_LEFT_V1`, `LINEAR16`
+- Source: `https://storage.lczero.org/files/networks-contrib/BT4-1024x15x32h-swa-6147500-policytune-332.pb.gz`
+- Compatibility: validated with LC0's native protobuf loader; use as `WeightsFile` for the LC0 UCI engine
+- Notes: Kept under the official upstream filename. This is a real trained playing network, not a generated test fixture.
+
 ## `puzzle-classifier_21planes-6blocksx64-head32-logit1.bin` (classifier format)
 
 - Size: 1.8 MiB

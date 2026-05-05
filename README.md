@@ -22,6 +22,7 @@ The repository is intentionally narrow in scope: it exists to keep large model b
 | --- | ---: | --- | --- |
 | `models/leela_112planes-30blocksx384-policyhead80-valuehead32-policy4672-wdl3.bin` | 317 MiB | `c4dd6b62acd3c86be3d6199a32d6119d9144f508f84c823f69881ae0bae41034` | LCZero run1 `#610153`, classical `30x384` net converted to LC0J |
 | `models/leela_112planes-10blocksx128-policyhead80-valuehead32-policy4672-wdl3.bin` | 15 MiB | `b99bec1aba97e96bf03ac8e016578527b983b6653f1adf040452f86c6f3ef348` | Small LC0J binary; see `models/README.md` |
+| `models/BT4-1024x15x32h-swa-6147500-policytune-332.pb.gz` | 365 MiB | `e6ada9d6c4a769bfab3aa0848d82caeb809aa45f83e6c605fc58a31d21bdd618` | Official LCZero BT4 transformer network; see `models/README.md` |
 
 ## Architecture Diagrams
 
